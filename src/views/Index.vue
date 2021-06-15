@@ -1,6 +1,7 @@
 <template>
   <div class="index">
-    <div v-for="movie in movies" v-bind:key="movie.id">
+        <input type="text" v-model="searchTerm" placeholder="Search"/>
+    <div v-for="movie in filterBy(movies, searchTerm, 'title')" v-bind:key="movie.id">
       <h2>{{ movie.title }}</h2>
       <p>{{ movie.year }}</p>
       <p><strong>Director: </strong>{{ movie.director }}</p>
@@ -17,7 +18,9 @@
 
 <script>
 import axios from "axios";
+import Vue2Filters from "vue2-filters";
 export default {
+  mixins: [Vue2Filters.mixin],
   data: function () {
     return {
       movies: [],
@@ -27,6 +30,7 @@ export default {
       newMovieDirector: "",
       newMovieEnglish: "",
       movieDetails: {},
+      searchTerm: "",
     };
   },
   created: function () {

@@ -2,52 +2,35 @@
   <div class="movies-new">
     <div>
       Title:
-      <input type="text" v-model="newMovieTitle" placeholder="Title" /><br />
+      <input type="text" v-model="newMovieTitle" placeholder="Title" />
+      <br />
       Year:
-      <input type="text" v-model="newMovieYear" placeholder="Year" /><br />
+      <input type="text" v-model="newMovieYear" placeholder="Year" />
+      <br />
       Director:
-      <input
-        type="text"
-        v-model="newMovieDirector"
-        placeholder="Director"
-      /><br />
+      <input type="text" v-model="newMovieDirector" placeholder="Director" />
+      <br />
       Plot:
-      <textarea
-        name="plot"
-        cols="30"
-        rows="10"
-        v-model="newMoviePlot"
-      ></textarea
-      ><br />
+      <textarea name="plot" cols="30" rows="10" maxlength="300" v-model="newMoviePlot"></textarea>
+      <br />
 
-      English? <br />
+      English?
+      <br />
       <div>
-        <label for="true"
-          >True
-          <input
-            value="true"
-            type="radio"
-            id="englishRadio"
-            name="english"
-            v-model="newMovieEnglish" /></label
-        ><br />
+        <label for="true">
+          True
+          <input value="true" type="radio" id="englishRadio" name="english" v-model="newMovieEnglish" />
+        </label>
+        <br />
 
-        <label for="false"
-          >False
-          <input
-            value="false"
-            type="radio"
-            id="englishRadio"
-            name="english"
-            v-model="newMovieEnglish"
-          />
+        <label for="false">
+          False
+          <input value="false" type="radio" id="englishRadio" name="english" v-model="newMovieEnglish" />
         </label>
         <br />
       </div>
 
-      <button class="more-info" v-on:click="createMovie">
-        Create New Movie
-      </button>
+      <button class="more-info" v-on:click="createMovie">Create New Movie</button>
     </div>
   </div>
 </template>
