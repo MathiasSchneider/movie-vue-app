@@ -2,53 +2,30 @@
   <div class="movies-edit">
     <div>
       Title:
-      <input
-        type="text"
-        v-model="editMovieParams.title"
-        placeholder="Title"
-      /><br />
+      <input type="text" v-model="editMovieParams.title" placeholder="Title" />
+      <br />
       Year:
-      <input
-        type="text"
-        v-model="editMovieParams.year"
-        placeholder="Year"
-      /><br />
+      <input type="text" v-model="editMovieParams.year" placeholder="Year" />
+      <br />
       Director:
-      <input
-        type="text"
-        v-model="editMovieParams.director"
-        placeholder="Director"
-      /><br />
+      <input type="text" v-model="editMovieParams.director" placeholder="Director" />
+      <br />
       Plot:
-      <textarea
-        name="plot"
-        cols="30"
-        rows="10"
-        v-model="editMovieParams.plot"
-      ></textarea
-      ><br />
-
-      English? <br />
+      <textarea name="plot" cols="30" rows="10" maxlength="300" v-model="editMovieParams.plot"></textarea>
+      <br />
+      <p>{{ 300 - editMovieParams.plot.length }} characters remaining</p>
+      English?
+      <br />
       <div>
-        <label for="true"
-          >True
-          <input
-            value="true"
-            type="radio"
-            id="englishRadio"
-            name="english"
-            v-model="editMovieParams.english" /></label
-        ><br />
+        <label for="true">
+          True
+          <input value="true" type="radio" id="englishRadio" name="english" v-model="editMovieParams.english" />
+        </label>
+        <br />
 
-        <label for="false"
-          >False
-          <input
-            value="false"
-            type="radio"
-            id="englishRadio"
-            name="english"
-            v-model="editMovieParams.english"
-          />
+        <label for="false">
+          False
+          <input value="false" type="radio" id="englishRadio" name="english" v-model="editMovieParams.english" />
         </label>
         <br />
       </div>

@@ -13,7 +13,7 @@
       Plot:
       <textarea name="plot" cols="30" rows="10" maxlength="300" v-model="newMoviePlot"></textarea>
       <br />
-
+      <p>{{ 300 - newMoviePlot.length }} characters remaining</p>
       English?
       <br />
       <div>
