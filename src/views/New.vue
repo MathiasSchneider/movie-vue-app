@@ -1,37 +1,48 @@
 <template>
   <div class="movies-new">
-    <div>
-      Title:
-      <input type="text" v-model="newMovieTitle" placeholder="Title" />
-      <br />
-      Year:
-      <input type="text" v-model="newMovieYear" placeholder="Year" />
-      <br />
-      Director:
-      <input type="text" v-model="newMovieDirector" placeholder="Director" />
-      <br />
-      Plot:
-      <textarea name="plot" cols="30" rows="10" maxlength="300" v-model="newMoviePlot"></textarea>
-      <br />
-      <p>{{ 300 - newMoviePlot.length }} characters remaining</p>
-      English?
-      <br />
+    <form method="POST" action="/new" v-on:submit.prevent="createMovie()">
       <div>
-        <label for="true">
-          True
-          <input value="true" type="radio" id="englishRadio" name="english" v-model="newMovieEnglish" />
-        </label>
+        <label for="title">Title:</label>
+        <input type="text" name="title" id="title" v-model="newMovieTitle" placeholder="Title" />
         <br />
+        <label for="year">Year:</label>
+        <input type="text" name="year" id="year" v-model="newMovieYear" placeholder="Year" />
+        <br />
+        <label for="director">Director:</label>
+        <input type="text" name="director" id="director" v-model="newMovieDirector" placeholder="Director" />
+        <br />
+        <label for="plot">Plot:</label>
+        <textarea
+          type="textarea"
+          name="plot"
+          id="plot"
+          cols="30"
+          rows="10"
+          maxlength="300"
+          v-model="newMoviePlot"
+          placeholder="Plot summary"
+        ></textarea>
+        <br />
+        <p>{{ 300 - newMoviePlot.length }} characters remaining</p>
+        <label for="english">English?</label>
+        <br />
+        <div>
+          <label for="true">
+            True
+            <input type="radio" name="englishTrue" id="english" value="true" v-model="newMovieEnglish" />
+          </label>
+          <br />
 
-        <label for="false">
-          False
-          <input value="false" type="radio" id="englishRadio" name="english" v-model="newMovieEnglish" />
-        </label>
-        <br />
+          <label for="false">
+            False
+            <input type="radio" name="englishFalse" id="english" value="false" v-model="newMovieEnglish" />
+          </label>
+          <br />
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Create New Movie" />
       </div>
-
-      <button class="more-info" v-on:click="createMovie">Create New Movie</button>
-    </div>
+    </form>
   </div>
 </template>
 
