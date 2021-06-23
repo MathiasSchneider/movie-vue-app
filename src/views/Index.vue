@@ -1,11 +1,61 @@
 <template>
-  <div class="index">
-        <input type="text" v-model="searchTerm" placeholder="Search"/>
-    <div v-for="movie in filterBy(movies, searchTerm, 'title')" v-bind:key="movie.id">
-      <h2>{{ movie.title }}</h2>
-      <p>{{ movie.year }}</p>
-      <p><strong>Director: </strong>{{ movie.director }}</p>
-      <router-link v-bind:to="`/show/${movie.id}`">More Details</router-link>
+  <div class="movies-index">
+    <datalist id="titles">
+      <option v-for="movie in movies" v-bind:key="movie.id">
+        {{ movie.title }}
+      </option>
+    </datalist>
+
+    <div class="row g-3 align-items-center">
+      <div class="col-auto">
+        <label for="inputPassword6" class="col-form-label">Search</label>
+      </div>
+      <div class="col-auto">
+        <input
+          type="text"
+          id="inputPassword6"
+          class="form-control"
+          aria-describedby="searchBox"
+          v-model="searchTerm"
+          list="titles"
+        />
+      </div>
+      <div class="col-auto">
+        <span id="searchBox" class="form-text">
+        </span>
+      </div>
+    </div>
+    <br />
+    <!-- <button v-on:click="setSortAttribute('title')" class="btn btn-success">
+      Sort by title
+      <span v-if="sortAttribute === 'title' && sortOrder === 1">^</span>
+      <span v-if="sortAttribute === 'title' && sortOrder === -1">v</span>
+    </button> -->
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div
+        class="col"
+        v-for="movie in filterBy(
+          orderBy(movies, sortAttribute, sortOrder),
+          searchTerm
+        )"
+        v-bind:key="movie.id"
+      >
+        <div class="card">
+          <router-link :to="`/show/${movie.id}`">
+            <img
+              :src="movie.image_url"
+              class="card-img-top"
+              :alt="movie.title"
+            />
+          </router-link>
+          <div class="card-body">
+            <h5 class="card-title">{{ movie.title }}</h5>
+            <p>Plot: {{ movie.plot }}</p>
+            <p>Director: {{ movie.director }}</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -44,5 +94,13 @@ export default {
       });
     },
   },
+  // setSortAttribute: function (attribute) {
+  //     if (this.sortAttribute === attribute) {
+  //       this.sortOrder = this.sortOrder * -1;
+  //     } else {
+  //       this.sortOrder = 1;
+  //       this.sortAttribute = attribute;
+  //     }
+  //    }
 };
 </script>

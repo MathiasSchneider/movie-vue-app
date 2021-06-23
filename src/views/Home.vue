@@ -1,5 +1,66 @@
 <template>
-  <div class="home">
+  <div class="movies-index">
+    <datalist id="titles">
+      <option v-for="movie in movies" v-bind:key="movie.id">
+        {{ movie.title }}
+      </option>
+    </datalist>
+
+    <div class="row g-3 align-items-center">
+      <div class="col-auto">
+        <label for="inputPassword6" class="col-form-label">Search</label>
+      </div>
+      <div class="col-auto">
+        <input
+          type="text"
+          id="inputPassword6"
+          class="form-control"
+          aria-describedby="searchBox"
+          v-model="searchTerm"
+          list="titles"
+        />
+      </div>
+      <div class="col-auto">
+        <span id="searchBox" class="form-text">
+          Search for a movie by it's title.
+        </span>
+      </div>
+    </div>
+    <br />
+    <button v-on:click="setSortAttribute('title')" class="btn btn-success">
+      Sort by title
+      <span v-if="sortAttribute === 'title' && sortOrder === 1">^</span>
+      <span v-if="sortAttribute === 'title' && sortOrder === -1">v</span>
+    </button>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div
+        class="col"
+        v-for="movie in filterBy(
+          orderBy(movies, sortAttribute, sortOrder),
+          searchTerm
+        )"
+        v-bind:key="movie.id"
+      >
+        <div class="card">
+          <router-link :to="`/show/${movie.id}`">
+            <img
+              :src="movie.image_url"
+              class="card-img-top"
+              :alt="movie.title"
+            />
+          </router-link>
+          <div class="card-body">
+            <h5 class="card-title">{{ movie.title }}</h5>
+            <p class="card-text">Ingredients: {{ movie.ingredients }}</p>
+            <p>Plot: {{ movie.plot }}</p>
+            <p>Director: {{ movie.director }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="home">
     <h2>Vue Movie App</h2>
     <h3>Add Movie</h3>
     <input type="text" v-model="newTitle" placeholder="Title" />
@@ -23,7 +84,7 @@
         <button>Close</button>
       </form>
     </dialog>
-  </div>
+  </div> -->
 </template>
 
 <style></style>
